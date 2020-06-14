@@ -1,6 +1,7 @@
 package app
 
 import (
+	"context"
 	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go"
 )
@@ -9,4 +10,5 @@ import (
 type App struct {
 	Firebase  *firebase.App
 	Firestore *firestore.Client
+	Context context.Context
 }

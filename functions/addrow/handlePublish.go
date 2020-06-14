@@ -1,26 +1,26 @@
 package addrow
 
 import (
+	"encoding/json"
 	"fmt"
-	"json"
 	"strings"
 	"time"
 
-	"google.golang.org/appengine/log"
+	"github.com/Jblew/iot2firebase/functions/app"
 )
 
-func handlePublish(app *App, subfolder string, payload string) error {
+func handlePublish(app *app.App, subfolder string, payload string) error {
 	collName, err := getFirestoreCol(subfolder)
 	if err != nil {
 		return err
 	}
 	docName := getFirestoreDoc()
-	docRef := app.Firestore.Collection(firestoreCol).Doc(firestoreDoc)
+	docRef := app.Firestore.Collection(collName).Doc(docName)
 
 	var payloadObjmap map[string]interface{}
-	err := json.Unmarshal([]byte(payload), &payloadObjmap)
+	err = json.Unmarshal([]byte(payload), &payloadObjmap)
 
-	_, _, err := docRef.Create(ctx, payloadObjmap)
+	_, err = docRef.Create(app.Context, payloadObjmap)
 	if err != nil {
 		return fmt.Errorf("Errr while publishing to firestore (col=%s, doc=%s): %v", collName, docName, err)
 	}
@@ -29,11 +29,11 @@ func handlePublish(app *App, subfolder string, payload string) error {
 }
 
 func getFirestoreCol(subfolder string) (string, error) {
-	subfolderParts = strings.SplitN(subfolder, "/", 2)
+	subfolderParts := strings.SplitN(subfolder, "/", 2)
 	if len(subfolderParts) < 2 {
-		return "", log.Errorf("Missing subfolder for firestore collection")
+		return "", fmt.Errorf("Missing subfolder for firestore collection")
 	}
-	return subfolderParts[1]
+	return subfolderParts[1], nil
 }
 
 func getFirestoreDoc() string {
