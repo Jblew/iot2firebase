@@ -4,6 +4,8 @@ import (
 	"context"
 	"log"
 	"time"
+
+	"github.com/Jblew/iot2firebase/functions/addrow"
 )
 
 // PubSubMessage is the payload of a Pub/Sub event.
@@ -16,17 +18,12 @@ type PubSubMessage struct {
 // AddRowOnPubSub adds row to a place requested by MQTT message
 func AddRowOnPubSub(ctx context.Context, msg PubSubMessage) error {
 	payloadStr := string(msg.Data)
+	printDebug(msg)
 
-	/*_, _, err := client.Collection("users").Add(ctx, map[string]interface{}{
-		"first": "Ada",
-		"last":  "Lovelace",
-		"born":  1815,
-	})
-	if err != nil {
-		log.Fatalf("Failed adding alovelace: %v", err)
-	}*/
+	return addrow.Handle(application, payloadStr, msg.Attributes)
+}
 
+func printDebug(msg PubSubMessage) {
+	payloadStr := string(msg.Data)
 	log.Printf("AddRowOnPubSub, str: %s!, attributes: %v, publishTime= %v", payloadStr, msg.Attributes, msg.PublishTime)
-
-	return nil
 }
