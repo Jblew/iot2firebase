@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${DIR}"
+set -e
 
 source ./iot.config.sh
 
@@ -22,11 +23,13 @@ PUBLIC_KEY_FILE="${DEVICE_DIR}/ec_public.pem"
 openssl ecparam -genkey -name prime256v1 -noout -out "${PRIVATE_KEY_FILE}"
 openssl ec -in "${PRIVATE_KEY_FILE}" -pubout -out "${PUBLIC_KEY_FILE}"
 
+echo "Creating device"
 # Create a new Cloud IoT device
 gcloud iot devices create "$DEVICE_NAME" \
   --region=$GCP_PROJECT_REGION \
   --registry=$GCP_IOT_REGISTRY_NAME \
   --public-key="path=${PUBLIC_KEY_FILE},type=es256"
+echo "Device successfuly published to IoT registry"
 
 DEVICE_CONFIG_FILE="${DEVICE_DIR}/device.env"
 cat >"${DEVICE_CONFIG_FILE}" <<EOF
@@ -34,11 +37,12 @@ DEVICE_NAME="${DEVICE_NAME}"
 EOF
 
 PRIVKEY_HEX_FILE="${DEVICE_DIR}/ec_private.hextxt"
+
 cat >"${PRIVKEY_HEX_FILE}" <<EOF
 // Error: ${PRIVKEY_HEX_FILE} is not populated. You need to populate it manually.
 To populate ec_private.hextxt:
-1. Run `openssl ec -in "${PRIVKEY_HEX_FILE}" -noout -text`
-2. Copy the bytes in `priv:` section.
+1. Run openssl ec -in "${PRIVKEY_HEX_FILE}" -noout -text
+2. Copy the bytes in priv: section.
 3. Paste the bytes to this file replacing current content
 4. Remove all newlines.
 
