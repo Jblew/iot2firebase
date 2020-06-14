@@ -7,6 +7,6 @@ import (
 
 // App is main class for functions
 type App struct {
-	firebase  *firebase.App
-	firestore *firestore.Client
+	Firebase  *firebase.App
+	Firestore *firestore.Client
 }

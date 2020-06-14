@@ -23,7 +23,7 @@ func Init(config Config) (*App, error) {
 	}
 
 	return &App{
-		firebase,
-		firestore,
+		Firebase:  firebase,
+		Firestore: firestore,
 	}, nil
 }
