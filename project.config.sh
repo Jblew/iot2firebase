@@ -6,3 +6,4 @@ export DEVICES_DIR="${PROJECT_DIR}/iot/devices/"
 export DEVICE_CONFIG_FILENAME="device.config.sh"
 export GCP_PROJECT_ID="things2firebase"
 export GCP_PROJECT_REGION="europe-west1"
+export PUBSUB_TOPIC=deviceevents
