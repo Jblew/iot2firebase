@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "${DIR}"
+set -e
+
+source ./functions.config.sh
+
+if [ -z "${PUBSUB_TOPIC}" ]; then
+    echo "PUBSUB_TOPIC env is not set"
+    exit 1
+fi
+
+if [ -z "${GCP_PROJECT_REGION}" ]; then
+    echo "GCP_PROJECT_REGION env is not set"
+    exit 1
+fi
+
+./generate-config.sh
+
+gcloud functions deploy AddRowOnPubSub \
+  --trigger-topic "${PUBSUB_TOPIC}" \
+  --region "${GCP_PROJECT_REGION}" \
+  --runtime go114 \
+  --memory "1024MB"
+
