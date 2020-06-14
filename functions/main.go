@@ -1,26 +1,14 @@
 package functions
 
 import (
-	"context"
 	"log"
-
-	firebase "firebase.google.com/go"
-	"firebase.google.com/go/db"
 )
 
-var client *db.Client
+var app *App
 
 func init() {
-	ctx := context.Background()
-	conf := &firebase.Config{
-		DatabaseURL: "https://<CHANGE_ME>.firebaseio.com/",
-	}
-	app, err := firebase.NewApp(ctx, conf)
+	app, err := app.Init()
 	if err != nil {
-		log.Fatalf("firebase.NewApp: %v", err)
-	}
-	client, err = app.Database(ctx)
-	if err != nil {
-		log.Fatalf("app.Firestore: %v", err)
+		log.Fatalf("Cannot initialize app: %v", err)
 	}
 }
