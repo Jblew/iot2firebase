@@ -8,6 +8,9 @@
     },
     {
       "path": "../iot"
+    },
+    {
+      "path": "../firmware"
     }
   ],
   "settings": {
