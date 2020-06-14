@@ -1,13 +1,12 @@
 package app
 
 import (
+	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go"
-	"firebase.google.com/go/firestore"
 )
 
-var client *firestore.Client
-
+// App is main class for functions
 type App struct {
-	firestore *firestore.Client
 	firebase  *firebase.App
+	firestore *firestore.Client
 }
