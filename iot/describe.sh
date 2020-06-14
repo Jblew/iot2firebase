@@ -12,4 +12,4 @@ fi
 gcloud iot devices describe $DEVICE_NAME \
   --project=$GCP_PROJECT_ID \
   --region=$GCP_PROJECT_REGION \
-  --registry=$REGISTRY_NAME
+  --registry=$GCP_IOT_REGISTRY_NAME

@@ -6,8 +6,8 @@ source ./iot.config.sh
 
 gcloud config set project ${GCP_PROJECT_ID}
 
-gcloud pubsub topics create "${PUBSUB_TOPIC}"
-gcloud iot registries create $REGISTRY_NAME \
+gcloud pubsub topics create "${GCP_PUBSUB_TOPIC}"
+gcloud iot registries create $GCP_IOT_REGISTRY_NAME \
   --region=$GCP_PROJECT_REGION \
-  --event-notification-config=subfolder="",topic=${PUBSUB_TOPIC}
+  --event-notification-config=subfolder="",topic=${GCP_PUBSUB_TOPIC}
 

@@ -5,5 +5,4 @@ IOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${IOT_DIR}/../project.config.sh
 
 export PUBSUB_SUBSCRIPTION=deviceevents-subscription
-export REGISTRY_NAME=iot2firebase-registry
 export CACERTS_FILE="${IOT_DIR}/gcp_roots.pem"

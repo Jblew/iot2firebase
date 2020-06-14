@@ -5,8 +5,8 @@ set -e
 
 source ./functions.config.sh
 
-if [ -z "${PUBSUB_TOPIC}" ]; then
-    echo "PUBSUB_TOPIC env is not set"
+if [ -z "${GCP_PUBSUB_TOPIC}" ]; then
+    echo "GCP_PUBSUB_TOPIC env is not set"
     exit 1
 fi
 
@@ -18,7 +18,7 @@ fi
 ./generate-config.sh
 
 gcloud functions deploy AddRowOnPubSub \
-  --trigger-topic "${PUBSUB_TOPIC}" \
+  --trigger-topic "${GCP_PUBSUB_TOPIC}" \
   --region "${GCP_PROJECT_REGION}" \
   --runtime go113 \
   --memory "1024MB"
