@@ -20,6 +20,6 @@ fi
 gcloud functions deploy AddRowOnPubSub \
   --trigger-topic "${PUBSUB_TOPIC}" \
   --region "${GCP_PROJECT_REGION}" \
-  --runtime go114 \
+  --runtime go113 \
   --memory "1024MB"
 

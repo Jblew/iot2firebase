@@ -1,8 +1,9 @@
 package functions
 
 import (
-	"functions/app"
 	"log"
+
+	"github.com/Jblew/iot2firebase/functions/app"
 )
 
 var application *app.App
