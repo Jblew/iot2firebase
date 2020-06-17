@@ -3,7 +3,7 @@
     "public": "public/dist",
     "predeploy": [
       "npm --prefix=\"public\" install",
-      "npm --prefix=\"public\" build"
+      "npm --prefix=\"public\" run build"
     ],
     "ignore": [
       "firebase.json",
