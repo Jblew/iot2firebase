@@ -1,1 +1,1 @@
-export * from './listenForFirestoreSnapshots'
+export * from './listenForFirestoreSnapshots';

@@ -11,7 +11,7 @@ import { SensorChart } from './sensor-chart';
 @Component({
   components: {
     SensorChart,
-  }
+  },
 })
 export default class MainPanel extends Vue {
 }

@@ -18,11 +18,11 @@ import { SensorRow } from '../../types';
 export default class SensorChart extends Vue {
   public sensorResource: Resource<SensorRow[]> = Resource.empty();
 
-  get entries(): [string, number][] {
+  get entries(): Array<[string, number]> {
     const raw: SensorRow[] = [...(this.sensorResource.result || [])];
     return raw
       .sort((a, b) => a.timestamp - b.timestamp)
-      .map(e => [entryLabel(e), e.humidityPercent]);
+      .map((e) => [entryLabel(e), e.humidityPercent]);
   }
 
   public beforeMount() {
@@ -36,3 +36,8 @@ function entryLabel(entry: SensorRow) {
   return date.toTimeString().substring(0, 12);
 }
 </script>
+<style>
+.error {
+  color: red;
+}
+</style>
