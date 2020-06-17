@@ -1,1 +1,1 @@
-export { default as SensorChart } from './SensorChart.vue'
+export { default as SensorChart } from './SensorChart.vue';
