@@ -54,7 +54,7 @@ void setupWifi()
     Serial.println("Starting wifi");
 
     WiFi.begin(ssid, password);
-    Serial.println("Connecting to WiFi");
+    Serial.printf("Connecting to WiFi %s\n", ssid);
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(100);
@@ -160,7 +160,7 @@ void setupWifi()
     WiFi.mode(WIFI_STA);
     // WiFi.setSleep(false); // May help with disconnect? Seems to have been removed from WiFi
     WiFi.begin(ssid, password);
-    Serial.println("Connecting to WiFi");
+    Serial.printf("Connecting to WiFi %s\n", ssid);
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(100);
@@ -304,7 +304,7 @@ void setupWifi()
 {
     WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
-    Serial.println("Connecting to WiFi");
+    Serial.printf("Connecting to WiFi %s\n", ssid);
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(100);
