@@ -4,9 +4,8 @@ import { ChartDataSets } from 'chart.js';
 
 export function getPointLabels(rows: SensorRow[]): string[] {
   return rows.map((row) => {
-    // const date = new Date(row.timestamp);
-    // return date.toTimeString();
-    return row.timestamp + '';
+    const date = new Date(row.timestamp * 1000);
+    return `${date.getHours()}:${date.getMinutes()}`;
   });
 }
 
