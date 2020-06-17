@@ -80,4 +80,5 @@ void publishSensors()
   sprintf(publishBuf, format, timestamp, temperatureC, pressureHPa, humidityPercent);
 
   publishTelemetry(mqttSubfolder, publishBuf);
+  Serial.println(publishBuf);
 }
