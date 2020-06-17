@@ -2,7 +2,7 @@
 import { Component, Mixins, Watch, Prop } from 'vue-property-decorator';
 import { Line } from 'vue-chartjs';
 import { ChartData, ChartOptions, ChartDataSets } from 'chart.js';
-import { getPointLabels, getTemperatureDataset, getHumidityDataset, getPressureDataset } from './get-datasets';
+import { getPointLabels, getTemperatureDataset, getHumidityDataset, getPressureDataset, yAxes } from './get-datasets';
 import { SensorRow } from '../../types';
 
 @Component
@@ -41,7 +41,7 @@ export default class SensorLineGraph extends Mixins(Line) {
     const options: ChartOptions = {
       maintainAspectRatio: false,
       scales: {
-        yAxes: [{ ticks: { beginAtZero: true } }],
+        yAxes,
       },
     };
     this.renderChart(data, options);

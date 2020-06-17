@@ -18,7 +18,7 @@ import { SensorRow } from '../../types';
 export default class SensorChart extends Vue {
   public sensorResource: Resource<SensorRow[]> = Resource.empty();
 
-  get entries(): SensorRow[] {
+  get rows(): SensorRow[] {
     const raw: SensorRow[] = [...(this.sensorResource.result || [])];
     return raw.sort((a, b) => a.timestamp - b.timestamp);
   }
