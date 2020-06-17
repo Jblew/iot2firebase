@@ -85,6 +85,12 @@
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": false
       }
+    },
+    "files.associations": {
+      "filesystem": "cpp",
+      "chrono": "cpp",
+      "ctime": "cpp",
+      "mutex": "cpp"
     }
   }
 }
