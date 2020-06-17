@@ -1,17 +1,13 @@
 #include "universal-mqtt.h"
 #include <Wire.h>
 #include "hardware/i2c.h"
+#include "BME280Read.h"
+#include "main.h"
 
 void messageReceived(String &topic, String &payload)
 {
   Serial.println("incoming: " + topic + " - " + payload);
 }
-
-#define PUBLISH_DELAY 300
-
-HardwareI2C hardwareI2C;
-
-const char *mqttSubfolder = "/publish/sensors/test/rows";
 
 void setup()
 {
@@ -20,6 +16,8 @@ void setup()
 
   hardwareI2C.startI2C();
   Serial.println("i2c_init_done");
+
+  bme280Read.init(readI2CForBme, writeI2CForBme, BME280_I2C_ADDR);
 
   setupCloudIoT();
 }
