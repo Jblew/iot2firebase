@@ -1,12 +1,14 @@
 <script lang="ts">
 import { Component, Mixins, Watch, Prop } from 'vue-property-decorator';
-import { Bar } from 'vue-chartjs';
+import { Line } from 'vue-chartjs';
 import { ChartData, ChartOptions, ChartDataSets } from 'chart.js';
+import { getPointLabels, getTemperatureDataset, getHumidityDataset, getPressureDataset } from './get-datasets';
+import { SensorRow } from '../../types';
 
 @Component
-export default class SensorLineGraph extends Mixins(Bar) {
+export default class SensorLineGraph extends Mixins(Line) {
   @Prop({ required: true, type: Array })
-  public entries!: CostBarEntry[];
+  public rows!: SensorRow[];
 
   @Prop({ required: true, type: String })
   public title!: string;
@@ -24,13 +26,16 @@ export default class SensorLineGraph extends Mixins(Bar) {
   }
 
   public rerender() {
-    const labels = this.entries.map((entry) => entry[0]);
-    const series = this.entries.map((entry) => entry[1]);
+    const labels = getPointLabels(this.rows);
+    const datasets = [
+      getTemperatureDataset(this.rows),
+      getHumidityDataset(this.rows),
+      getPressureDataset(this.rows),
+    ];
 
-    const dataset: ChartDataSets = { label: this.title, data: series, backgroundColor: this.color };
     const data: ChartData = {
       labels,
-      datasets: [dataset],
+      datasets,
     };
 
     const options: ChartOptions = {
@@ -42,6 +47,4 @@ export default class SensorLineGraph extends Mixins(Bar) {
     this.renderChart(data, options);
   }
 }
-
-type CostBarEntry = [string, number];
 </script>

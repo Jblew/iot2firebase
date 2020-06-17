@@ -1,6 +1,6 @@
 <template>
   <stateful-resource :resource="sensorResource">
-    <SensorLineGraph :entries="entries" title="Sensor Data" color="#e6ee9c" />
+    <SensorLineGraph :rows="rows" title="Sensor Data" color="#e6ee9c" />
   </stateful-resource>
 </template>
 
@@ -18,11 +18,9 @@ import { SensorRow } from '../../types';
 export default class SensorChart extends Vue {
   public sensorResource: Resource<SensorRow[]> = Resource.empty();
 
-  get entries(): Array<[string, number]> {
+  get entries(): SensorRow[] {
     const raw: SensorRow[] = [...(this.sensorResource.result || [])];
-    return raw
-      .sort((a, b) => a.timestamp - b.timestamp)
-      .map((e) => [entryLabel(e), e.humidityPercent]);
+    return raw.sort((a, b) => a.timestamp - b.timestamp);
   }
 
   public beforeMount() {
@@ -31,10 +29,7 @@ export default class SensorChart extends Vue {
     });
   }
 }
-function entryLabel(entry: SensorRow) {
-  const date = new Date(entry.timestamp);
-  return date.toTimeString().substring(0, 12);
-}
+
 </script>
 <style>
 .error {
