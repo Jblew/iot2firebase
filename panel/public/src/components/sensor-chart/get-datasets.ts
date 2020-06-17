@@ -1,5 +1,5 @@
 import { SensorRow } from '@/types';
-import { ChartDataSets } from 'chart.js';
+import { ChartDataSets, ChartPoint } from 'chart.js';
 
 
 export function getPointLabels(rows: SensorRow[]): string[] {
@@ -10,7 +10,7 @@ export function getPointLabels(rows: SensorRow[]): string[] {
 }
 
 export function getTemperatureDataset(rows: SensorRow[]): ChartDataSets {
-  const series = rows.map((row) => row.temperatureC);
+  const series = rows.map((row) => toPoint(row.timestamp, row.temperatureC));
   return {
     label: 'Temperature [C]',
     data: series,
@@ -21,7 +21,7 @@ export function getTemperatureDataset(rows: SensorRow[]): ChartDataSets {
 }
 
 export function getHumidityDataset(rows: SensorRow[]): ChartDataSets {
-  const series = rows.map((row) => row.humidityPercent);
+  const series = rows.map((row) => toPoint(row.timestamp, row.humidityPercent));
   return {
     label: 'Humidity [%]',
     data: series,
@@ -32,7 +32,7 @@ export function getHumidityDataset(rows: SensorRow[]): ChartDataSets {
 }
 
 export function getPressureDataset(rows: SensorRow[]): ChartDataSets {
-  const series = rows.map((row) => row.pressureHPa);
+  const series = rows.map((row) => toPoint(row.timestamp, row.pressureHPa));
   return {
     label: 'Pressure [hPa]',
     data: series,
@@ -84,3 +84,10 @@ export const yAxes = [
     },
   },
 ];
+
+function toPoint(timestampS: number, value: number): ChartPoint {
+  return {
+    y: value,
+    t: new Date(timestampS * 1000),
+  }
+}
