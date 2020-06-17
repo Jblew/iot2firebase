@@ -72,10 +72,10 @@ void publishSensors()
   float pressureHPa = bme.readPressure() / 100.0F;
   float humidityPercent = bme.readHumidity();
   char *format = "{"
-                 "\"timestamp\":\"%lu\","
-                 "\"temperatureC\":\"%f\","
-                 "\"pressureHPa\":\"%f\","
-                 "\"humidityPercent\":\"%f\""
+                 "\"timestamp\":%lu,"
+                 "\"temperatureC\":%f,"
+                 "\"pressureHPa\":%f,"
+                 "\"humidityPercent\":%f"
                  "}";
   sprintf(publishBuf, format, timestamp, temperatureC, pressureHPa, humidityPercent);
 

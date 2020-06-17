@@ -10,7 +10,7 @@
 HardwareI2C hardwareI2C;
 Adafruit_BME280 bme;
 
-const char *mqttSubfolder = "/publish/sensors/humidity/rows";
+const char *mqttSubfolder = "/publish/sensors/environmental/rows";
 
 void initBME();
 void publishSensors();
