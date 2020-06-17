@@ -3,8 +3,8 @@
 #ifndef _HARDWARE_I2C_H_
 #define _HARDWARE_I2C_H_
 
-#define I2C_BUSA_SDA 21
-#define I2C_BUSA_SCL 22
+#define I2C_BUSA_SDA 18
+#define I2C_BUSA_SCL 23
 // #define I2C_BUSB_SDA 19
 // #define I2C_BUSB_SCL 18
 #define I2C_FREQUENCY 400000
