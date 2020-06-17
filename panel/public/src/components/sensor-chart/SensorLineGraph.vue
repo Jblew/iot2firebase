@@ -38,10 +38,19 @@ export default class SensorLineGraph extends Mixins(Line) {
       datasets,
     };
 
+    const timeMin = this.rows.length > 0 ? new Date(this.rows[0].timestamp * 1000) : new Date();
+
     const options: ChartOptions = {
       maintainAspectRatio: false,
       scales: {
         yAxes,
+        xAxes: [{
+          type: 'time',
+          distribution: 'linear',
+          time: {
+            min: timeMin.toISOString(),
+          },
+        }],
       },
     };
     this.renderChart(data, options);

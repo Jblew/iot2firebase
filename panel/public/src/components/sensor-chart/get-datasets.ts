@@ -89,5 +89,5 @@ function toPoint(timestampS: number, value: number): ChartPoint {
   return {
     y: value,
     t: new Date(timestampS * 1000),
-  }
+  };
 }

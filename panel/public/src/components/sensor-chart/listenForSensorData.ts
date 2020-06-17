@@ -14,7 +14,9 @@ function getQuery() {
 }
 
 function processDocuments(docs: firebase.firestore.QueryDocumentSnapshot[]) {
-  return docs.map((doc) => doc.data() as SensorRow);
+  return docs.filter(
+    (_, index) => index % projectConfig.showNthRow === 0,
+  ).map((doc) => doc.data() as SensorRow);
 }
 
 function getCollection() {
