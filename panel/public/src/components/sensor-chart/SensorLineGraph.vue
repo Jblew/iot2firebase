@@ -16,7 +16,7 @@ export default class SensorLineGraph extends Mixins(Line) {
   @Prop({ required: true, type: String })
   public color!: string;
 
-  @Watch('entries')
+  @Watch('rows')
   public entriesChanged() {
     this.rerender();
   }
