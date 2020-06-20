@@ -17,6 +17,8 @@ fi
 
 ./generate-config.sh
 
+gcloud config set project ${GCP_PROJECT_ID}
+
 gcloud functions deploy AddRowOnPubSub \
   --trigger-topic "${GCP_PUBSUB_TOPIC}" \
   --region "${GCP_PROJECT_REGION}" \
